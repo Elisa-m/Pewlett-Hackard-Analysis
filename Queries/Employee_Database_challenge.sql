@@ -37,14 +37,14 @@ ORDER BY emp_no;
 SELECT * FROM retirement_titles;
 
 -- Create a Unique Titles table that contains the employee number, first and last name, and most recent title. 
-SELECT DISTINCT ON (emp_no) emp_no,
-first_name,
-last_name,
-title
-
+SELECT DISTINCT ON (emp_no) 
+	emp_no,
+	first_name,
+	last_name,
+	title
 INTO unique_titles
 FROM retirement_titles
-ORDER BY emp_no, from_date DESC;
+ORDER BY emp_no, to_date DESC;
 
 -- Check the table
 SELECT * FROM unique_titles;
@@ -54,8 +54,39 @@ SELECT COUNT(title), title
 INTO retiring_titles
 FROM unique_titles
 GROUP BY title
-ORDER BY count DESC
+ORDER BY count DESC;
 
 -- Check the table
 SELECT * FROM retiring_titles;
+
+
+-- Deliverable 2
+
+-- Creating tables for PH-EmployeeDB
+
+CREATE TABLE department_employee (
+     emp_no INT NOT NULL, 
+	 dept_no VARCHAR(4) NOT NULL, 
+	 from_date DATE NOT NULL, 
+	 to_date DATE NOT NULL, 
+	 FOREIGN KEY (emp_no) REFERENCES employees (emp_no)
+);
+
+-- Create a Mentorship Eligibility table for current employees who were born between 
+-- January 1, 1965 and December 31, 1965.
+SELECT DISTINCT ON (e.emp_no) 
+	e.emp_no,
+	e.first_name, 
+	e.last_name, 
+	e.birth_date,
+	de.from_date,
+	de.to_date,
+	tl.title
+INTO mentorship_eligibility
+FROM employees as e
+	INNER JOIN department_employee as de ON e.emp_no = de.emp_no
+	INNER JOIN titles as tl ON e.emp_no = tl.emp_no
+WHERE (de.to_date = '9999-01-01')
+	AND (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
+ORDER BY e.emp_no; 
 

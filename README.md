@@ -7,9 +7,12 @@ The puspose of this analysis is to determine the number of retiring employees pe
 Here are the findings: 
 1. 90,398 employees were born in the years 1952 through 1955 and are eligible for retirement. 
 2. Here's the distribution by employee title of employees who are eligible for retirement: 
+
 ![](retiring_titles.png)
+
 3. 1,549 employees were born in the year 1965 and are eligible to participate in the "silver tsunami" mentorship program. 
 4. Here's the distribution by employee title of employees who are elibilbe to participate in the "silver tsunami" mentorship program:
+
 ![](mentorship_titles.png)
 
 ## Summary

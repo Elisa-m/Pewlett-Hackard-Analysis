@@ -97,3 +97,10 @@ FROM mentorship_eligibility
 GROUP BY title
 ORDER BY count DESC;
 
+-- Combine tables
+SELECT rt.title,
+	rt.count, 
+	me.count
+FROM retiring_titles as rt
+INNER JOIN mentorship_title as me ON rt.title = me.title;
+
